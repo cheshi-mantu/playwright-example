@@ -10,20 +10,12 @@ import {
 import { allure } from "allure-playwright";
 
 test.beforeEach(async ({ page }) => {
-  allure.severity("Hight");
-  allure.epic("Todo App functionality");
-  allure.owner("eroshenkoam");
 
   await visitTestApp(page);
 });
 
 test.describe("New Todo", () => {
   test("should allow me to add todo items", async ({ page },testInfo) => {
-    allure.description("This Test make shure that you can add todo items");
-    allure.issue({
-      url: "https://github.com/allure-framework/allure-js/pull/408",
-      name: "github issue",
-    });
 
     await testInfo.attach("TODO_ITEMS", {
       body: JSON.stringify(TODO_ITEMS),
@@ -56,11 +48,6 @@ test.describe("New Todo", () => {
   test("should clear text input field when an item is added", async ({
     page,
   }) => {
-    allure.description(
-      "This Test make shure that text input was cleared field when an item is added"
-    );
-    allure.tag("unstable");
-
     await test.step("Create one todo item.", async () => {
       await page.locator(".new-todo").fill(TODO_ITEMS[0]);
       await page.locator(".new-todo").press("Enter");
@@ -75,9 +62,6 @@ test.describe("New Todo", () => {
   test("should append new items to the bottom of the list", async ({
     page,
   }) => {
-    allure.description(
-      "This Test make shure that text input was cleared field when an item is added"
-    );
     allure.issue({ url: "https://qameta.io/", name: "qameta.io site" });
     allure.tag("experemntal");
 

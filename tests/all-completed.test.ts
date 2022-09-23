@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { allure } from "allure-playwright";
+
 import {
   checkNumberOfCompletedTodosInLocalStorage,
   checkNumberOfTodosInLocalStorage,
@@ -8,9 +8,6 @@ import {
 } from "./test-utils";
 
 test.beforeEach(async ({ page }) => {
-  allure.severity("Medium");
-  allure.epic("Todo App functionality");
-  allure.owner("baev");
 
   await visitTestApp(page);
 });
@@ -28,10 +25,6 @@ test.describe("Mark all as completed", () => {
   });
 
   test("should allow me to mark all items as completed", async ({ page }) => {
-    allure.description(
-      "This Test make shure that you can mark all items as completed"
-    );
-    allure.tag("unstable-backend");
 
     await test.step("Complete all todos.", async () => {
       await page.locator(".toggle-all").check();
@@ -47,11 +40,8 @@ test.describe("Mark all as completed", () => {
   test("should allow me to clear the complete state of all items", async ({
     page,
   }, testInfo) => {
-    allure.description(
-      "This test make shure that you can clear the complete state of all items"
-    );
 
-    await test.step("Check and then immediately uncheck.", async () => {
+      await test.step("Check and then immediately uncheck.", async () => {
       await page.locator(".toggle-all").check();
       await page.locator(".toggle-all").uncheck();
     });
