@@ -11,7 +11,7 @@ import { allure } from "allure-playwright";
 
 test.beforeEach(async ({ page }) => {
   allure.severity("Hight");
-  allure.epic("Todo App functionality");
+  allure.feature("Todo App functionality");
   allure.owner("eroshenkoam");
 
   await visitTestApp(page);
@@ -21,7 +21,8 @@ test.beforeEach(async ({ page }) => {
 
 test.describe("New Todo", () => {
   test("should allow me to add todo items", async ({ page },testInfo) => {
-    allure.description("This Test make shure that you can add todo items");
+    allure.description("This Test makes shure, you can add todo items");
+    allure.story("Todo note creation");
     allure.issue({
       url: "https://github.com/allure-framework/allure-js/pull/408",
       name: "github issue",
@@ -62,6 +63,7 @@ test.describe("New Todo", () => {
       "This Test make shure that text input was cleared field when an item is added"
     );
     allure.tag("unstable");
+    allure.story("Managing todo notes");
 
     await test.step("Create one todo item.", async () => {
       await page.locator(".new-todo").fill(TODO_ITEMS[0]);
@@ -78,10 +80,11 @@ test.describe("New Todo", () => {
     page,
   }) => {
     allure.description(
-      "This Test make shure that text input was cleared field when an item is added"
+      "This Test makes shure that text input was cleared field when an item is added"
     );
     allure.issue({ url: "https://qameta.io/", name: "qameta.io site" });
     allure.tag("experemntal");
+    allure.story("Managing todo notes");
 
     await test.step("Create 3 todo items.", async () => {
       await createDefaultTodos(page);
