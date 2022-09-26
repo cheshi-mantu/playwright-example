@@ -9,13 +9,15 @@ import {
 
 test.beforeEach(async ({ page }) => {
   allure.severity("Medium");
-  allure.epic("Todo App functionality");
+  allure.epic("E2E Tests for all Todo app features set");
+  allure.feature("Manage the state via Bulk operations");
   allure.owner("baev");
 
   await visitTestApp(page);
 });
 
 test.describe("Mark all as completed", () => {
+
   test.beforeEach(async ({ page }) => {
     await test.step("Create default todos", async () => {
       await createDefaultTodos(page);
@@ -27,11 +29,13 @@ test.describe("Mark all as completed", () => {
     await checkNumberOfTodosInLocalStorage(page, 3);
   });
 
-  test("should allow me to mark all items as completed", async ({ page }) => {
-    allure.description(
-      "This Test make shure that you can mark all items as completed"
-    );
-    allure.tag("unstable-backend");
+  test("Check if an end user can mark all todo items as completed", async ({ page }) => {
+    allure.story("Set the completed state via Bulk operations");
+    allure.description("check if an end user can mark all items as completed");
+
+    allure.tag("bulk");
+    allure.tag("critical");
+    allure.tag("smoke");
 
     await test.step("Complete all todos.", async () => {
       await page.locator(".toggle-all").check();
@@ -44,12 +48,15 @@ test.describe("Mark all as completed", () => {
     await checkNumberOfCompletedTodosInLocalStorage(page, 3);
   });
 
-  test("should allow me to clear the complete state of all items", async ({
+  test("Check if an end user can clear the complete state of all items", async ({
     page,
   }, testInfo) => {
-    allure.description(
-      "This test make shure that you can clear the complete state of all items"
-    );
+    allure.story("Clear the state via Bulk operations");
+    allure.tag("bulk");
+    allure.tag("critical");
+    allure.tag("smoke");
+    allure.tag("release");
+    allure.description("Make shure, you can clear the complete state of all items");
 
     await test.step("Check and then immediately uncheck.", async () => {
       await page.locator(".toggle-all").check();
@@ -67,13 +74,18 @@ test.describe("Mark all as completed", () => {
     ).toHaveClass(["", "", ""]);
   });
 
-  test("complete all checkbox should update state when items are completed / cleared", async ({
+  test("check if \"complete all\" checkbox updates the state when items are completed / cleared", async ({
     page,
   }, testInfo) => {
     const toggleAll = page.locator(".toggle-all");
     await test.step("Toggle all", async () => {
       await toggleAll.check();
     });
+
+    allure.tag("bulk");
+    allure.tag("critical");
+    allure.tag("smoke");
+    allure.story("Set the completed state via Bulk operations");
 
     await expect(toggleAll).toBeChecked();
     await checkNumberOfCompletedTodosInLocalStorage(page, 3);

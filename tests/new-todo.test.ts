@@ -10,8 +10,9 @@ import {
 import { allure } from "allure-playwright";
 
 test.beforeEach(async ({ page }) => {
-  allure.severity("Hight");
-  allure.feature("Todo App functionality");
+  allure.severity("High");
+  allure.epic("E2E Tests for all Todo app features set");
+  allure.feature("Single item operations");
   allure.owner("eroshenkoam");
 
   await visitTestApp(page);
@@ -27,6 +28,9 @@ test.describe("New Todo", () => {
       url: "https://github.com/allure-framework/allure-js/pull/408",
       name: "github issue",
     });
+    allure.tag("critical");
+    allure.tag("release");
+    allure.tag("regular");
 
     await testInfo.attach("TODO_ITEMS", {
       body: JSON.stringify(TODO_ITEMS),
@@ -56,14 +60,14 @@ test.describe("New Todo", () => {
     await checkNumberOfTodosInLocalStorage(page, 2);
   });
 
-  test("should clear text input field when an item is added", async ({
+  test("text input field must be cleared when a new item is added", async ({
     page,
   }) => {
-    allure.description(
-      "This Test make shure that text input was cleared field when an item is added"
-    );
-    allure.tag("unstable");
-    allure.story("Managing todo notes");
+    allure.description("check if text input is cleared field after a new item is added");
+    allure.story("Todo note creation");    
+    allure.tag("single");
+    allure.tag("critical");
+    allure.tag("smoke");
 
     await test.step("Create one todo item.", async () => {
       await page.locator(".new-todo").fill(TODO_ITEMS[0]);
@@ -79,12 +83,13 @@ test.describe("New Todo", () => {
   test("should append new items to the bottom of the list", async ({
     page,
   }) => {
-    allure.description(
-      "This Test makes shure that text input was cleared field when an item is added"
-    );
+    allure.description("Check if a newly created item is added to the bottom of the existing list");
     allure.issue({ url: "https://qameta.io/", name: "qameta.io site" });
-    allure.tag("experemntal");
-    allure.story("Managing todo notes");
+    allure.tag("non-critical");
+    allure.tag("release");
+    allure.tag("smoke");
+    
+    allure.story("Todo note creation");
 
     await test.step("Create 3 todo items.", async () => {
       await createDefaultTodos(page);
