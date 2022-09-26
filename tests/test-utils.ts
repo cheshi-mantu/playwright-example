@@ -17,21 +17,19 @@ export async function checkNumberOfTodosInLocalStorage(
   page: Page,
   expected: number
 ) {
-  return await test.step(
-    "Check number of todos in localstorage",
+  return () => {
     async () =>
       await page.waitForFunction((e) => {
         return JSON.parse(localStorage["react-todos"]).length === e;
       }, expected)
-  );
+    }
 }
 
 export async function checkNumberOfCompletedTodosInLocalStorage(
   page: Page,
   expected: number
 ) {
-  return await test.step(
-    "Check number of completed todos in localstorage",
+  return () => {
     async () =>
       await page.waitForFunction((e) => {
         
@@ -41,11 +39,11 @@ export async function checkNumberOfCompletedTodosInLocalStorage(
           ).length === e
         );
       }, expected)
-  );
+    }
 }
 
 export async function visitTestApp(page: Page) {
-  await test.step("Visit test app", async () => {
+
     await page.goto("https://demo.playwright.dev/todomvc");
-  });
+
 }
