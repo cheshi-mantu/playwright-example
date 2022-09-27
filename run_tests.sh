@@ -4,4 +4,5 @@ npm test
 echo "browser=chromium" | tee ./allure-results/environment.properties
 echo "execution=local" | tee -a ./allure-results/environment.properties
 echo "arch=arm64" | tee -a ./allure-results/environment.properties
-allure serve
+npx playwright show-report
+# allure serve
