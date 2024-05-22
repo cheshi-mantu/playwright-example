@@ -8,7 +8,8 @@ on:
         required: false
       ALLURE_USERNAME:
         description: "ALLURE_USERNAME service parameter. Leave blank"
-        required: falsejobs:
+        required: false
+jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
